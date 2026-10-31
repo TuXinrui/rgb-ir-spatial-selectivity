@@ -1,0 +1,4 @@
+/figures/
+/.venv/
+__pycache__/
+*.py[cod]

@@ -1,0 +1,846 @@
+{
+  "schema": "rgbir-cross-dataset-results-v1",
+  "status": "recorded_results",
+  "scope": "ICAFusion Native/UNIFORM/ZERO measurements on FLIR3c (RGB-thermal) and a local eight-class VEDAI HBB task (RGB-NIR). DroneVehicle references resolve to dv_results.json.",
+  "flir3c": {
+    "status": "reused_read_only",
+    "best_sha256": "14e616db2ca8212d56cf46eda503c8fac97200de1e3b7fc161cd9834c90f94af",
+    "training": {
+      "completed_epochs": 150,
+      "raw_callback_count": 151,
+      "csv_epochs": 150,
+      "selection": {
+        "criterion": "val mAP50-95",
+        "epoch": 114,
+        "val_metric": 0.52909
+      }
+    },
+    "data": {
+      "classes": [
+        "person",
+        "car",
+        "bicycle"
+      ],
+      "nc": 3,
+      "train": 3716,
+      "val": 413,
+      "test": 1013,
+      "modalities": [
+        "RGB",
+        "thermal infrared"
+      ]
+    },
+    "model": {
+      "yaml_sha256": "447e9d7fc0b073e1966aa0a8bcf4b3bd930e463ac45e02de8242805c1a704c0a",
+      "scale": "m",
+      "imgsz": 640,
+      "batch": 8,
+      "epochs": 150,
+      "seed": 1,
+      "optimizer": "SGD",
+      "lr0": 0.002,
+      "configuration_name": "yolo11m-dual-ica.yaml"
+    },
+    "states_fraction": {
+      "native": {
+        "mAP50_95": 0.42398767354332584,
+        "AP50": 0.7675053931817111,
+        "AP75": 0.40373941073658526
+      },
+      "uniform": {
+        "mAP50_95": 0.42397264891425424,
+        "AP50": 0.7675248200792922,
+        "AP75": 0.40373920305282257
+      },
+      "zero": {
+        "mAP50_95": 0.4234389771932391,
+        "AP50": 0.7687982713984,
+        "AP75": 0.4019148460267237
+      }
+    },
+    "deltas_pp": {
+      "native_minus_uniform": {
+        "mAP50_95_pp": 0.0015024629071602735,
+        "AP50_pp": -0.0019426897581165115,
+        "AP75_pp": 2.0768376268742728e-05
+      },
+      "native_minus_zero": {
+        "mAP50_95_pp": 0.054869635008675255,
+        "AP50_pp": -0.12928782166888864,
+        "AP75_pp": 0.18245647098615314
+      }
+    },
+    "source": {
+      "summary_sha256": "362d8e4d50f01a18e46fd1e101236afb8287da8d09121f9c17d6eefded4076b4",
+      "pointer": "/reused_flir/evaluation/states",
+      "record_id": "cross-dataset-evaluation-summary",
+      "upstream_records": {
+        "flir3c-input-qualification": {
+          "sha256": "b8fd32db26d6d042b6783921afccb8bf9d76834c6b50bb36c57ff66233cd4048"
+        },
+        "flir3c-training": {
+          "sha256": "c4cf444672c8cb78d7d92f58e4c692dab4062462897c940bdb9175e234373a3e"
+        },
+        "flir3c-evaluation": {
+          "sha256": "92151a98c8026ee0e966735c1cd9be12f77e3923ae1ce432f2c490a7f81f59be"
+        },
+        "flir3c-result": {
+          "sha256": "18f83f1cbe77c1b69775b02d56a03af537eb0e83bd9131cbc28e71eb8b2203a1"
+        },
+        "flir3c-training-history": {
+          "sha256": "d1b2688ef022166b95312226e6c41b651ec3cad0613eb76f709669bb8a75e62a"
+        }
+      }
+    },
+    "source_record": "flir3c-icafusion-seed1-run"
+  },
+  "vedai": {
+    "status": "new_computation",
+    "counts": {
+      "folds": 10,
+      "checkpoints": 10,
+      "states": 30
+    },
+    "data": {
+      "classes": [
+        "car",
+        "truck",
+        "pickup",
+        "tractor",
+        "camping car",
+        "other vehicle",
+        "van",
+        "plane"
+      ],
+      "nc": 8,
+      "train_per_fold": 980,
+      "inner_val_per_fold": 109,
+      "outer_test_per_fold": 121,
+      "outer_test_union": 1210,
+      "outer_test_pairwise_disjoint": true,
+      "original_train_per_fold": 1089,
+      "original_yaml_display_names": [
+        "car",
+        "pickup",
+        "truck",
+        "van",
+        "bus",
+        "camper",
+        "car_trailer",
+        "other"
+      ],
+      "official_class_ids": [
+        1,
+        2,
+        11,
+        4,
+        5,
+        10,
+        9,
+        31
+      ],
+      "modalities": [
+        "RGB",
+        "near-infrared"
+      ],
+      "annotation_reconstruction": {
+        "record_id": "vedai-annotation-mapping",
+        "annotation_url": "https://downloads.greyc.fr/vedai/Annotations1024.tar",
+        "annotation_sha256": "a193604cdc63201c78d83ca22dc23b2e183afc98de1d3d2e2cd2c1113a7ca533",
+        "devkit_url": "https://downloads.greyc.fr/vedai/DevKit.tar",
+        "devkit_sha256": "bbd37a07bf552c06b4b694e909c2e6de0e3757f75410c57feecb176a8e5583a1",
+        "transform": "Take the axis-aligned min/max of the official polygon corners; form center and width/height; divide by 1024; clip only center coordinates to [0,1], retaining widths and heights.",
+        "retained_boxes": 3517,
+        "exact_geometry_matches": 3517,
+        "retained_class_counts": [
+          1349,
+          300,
+          941,
+          190,
+          390,
+          200,
+          100,
+          47
+        ],
+        "center_clipped_boxes": 10,
+        "center_clipped_by_local_id": {
+          "0": 6,
+          "2": 3,
+          "5": 1
+        },
+        "excluded_official_classes": [
+          7,
+          8,
+          23
+        ],
+        "excluded_boxes_within_folds": 177,
+        "official_images_outside_folds": 36,
+        "boxes_outside_folds": 63,
+        "note": "The class metadata was corrected from the original display names using an exact annotation reconstruction. Numeric class IDs and all recorded AP values are unchanged. The historical conversion script was not recovered."
+      }
+    },
+    "model": {
+      "yaml_sha256": "912632d0991420bfd42685d6106cc8c28c66d10ca869bd5f8d515ec86bdfe974",
+      "scale": "s",
+      "imgsz": 1024,
+      "batch": 8,
+      "epochs": 100,
+      "seed": 1,
+      "optimizer": "SGD",
+      "lr0": 0.002,
+      "selection": "inner-validation AP50",
+      "configuration_name": "yolo11s-dual-ica.yaml"
+    },
+    "folds": {
+      "fold01": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 45,
+          "val_AP50": 0.79231
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "68988547f52fddeee2355b786776e257f7e19bb5a63b7f450b906fb70487f945"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.45815478260851633,
+            "AP50": 0.7734099174231115,
+            "AP75": 0.477925176470486
+          },
+          "uniform": {
+            "mAP50_95": 0.4580660260339756,
+            "AP50": 0.77333329634915,
+            "AP75": 0.477925176470486
+          },
+          "zero": {
+            "mAP50_95": 0.45591384179003214,
+            "AP50": 0.775956898103736,
+            "AP75": 0.47015512987848707
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": 0.008875657454071595,
+            "AP50_pp": 0.007662107396144702,
+            "AP75_pp": 0.0
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": 0.2240940818484194,
+            "AP50_pp": -0.2546980680624533,
+            "AP75_pp": 0.7770046591998925
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold01/evaluation/states"
+      },
+      "fold02": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 54,
+          "val_AP50": 0.79803
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "9c757e759cc3c261fd2bca6d37f4964873c03021854907599b4d67948f69fd9c"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.521428615996112,
+            "AP50": 0.7917884238297372,
+            "AP75": 0.6365533566765871
+          },
+          "uniform": {
+            "mAP50_95": 0.5223117291459314,
+            "AP50": 0.7917702936700698,
+            "AP75": 0.6365044652516655
+          },
+          "zero": {
+            "mAP50_95": 0.5241126190514157,
+            "AP50": 0.7910799430045488,
+            "AP75": 0.6608028763101108
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": -0.088311314981937,
+            "AP50_pp": 0.0018130159667451018,
+            "AP75_pp": 0.004889142492159326
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": -0.26840030553036964,
+            "AP50_pp": 0.07084808251884844,
+            "AP75_pp": -2.424951963352373
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold02/evaluation/states"
+      },
+      "fold03": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 54,
+          "val_AP50": 0.80008
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "c303b31e9a470fcfe4902ffad1acf5f58d4a9f14b240cb94d342b8bed04afd95"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.44913859307748716,
+            "AP50": 0.7304775439665541,
+            "AP75": 0.47420907414983476
+          },
+          "uniform": {
+            "mAP50_95": 0.44913115329906506,
+            "AP50": 0.7304741009704354,
+            "AP75": 0.47422430194647286
+          },
+          "zero": {
+            "mAP50_95": 0.448327016060167,
+            "AP50": 0.7267701751904856,
+            "AP75": 0.4744924143271952
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": 0.0007439778422102528,
+            "AP50_pp": 0.0003442996118652175,
+            "AP75_pp": -0.001522779663809537
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": 0.08115770173201531,
+            "AP50_pp": 0.3707368776068476,
+            "AP75_pp": -0.028334017736042494
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold03/evaluation/states"
+      },
+      "fold04": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 38,
+          "val_AP50": 0.76509
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "6b087afe13efe282995ff25e9ff2755eb2fe6c98fadc7c67838c84228e3ffbd0"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.4763810386879337,
+            "AP50": 0.7682379988716056,
+            "AP75": 0.516574153804269
+          },
+          "uniform": {
+            "mAP50_95": 0.4749713112380608,
+            "AP50": 0.7665128321250763,
+            "AP75": 0.5149350984048213
+          },
+          "zero": {
+            "mAP50_95": 0.4747739335257492,
+            "AP50": 0.7656973617333955,
+            "AP75": 0.5184505060334239
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": 0.14097274498728884,
+            "AP50_pp": 0.17251667465293385,
+            "AP75_pp": 0.1639055399447642
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": 0.16071051621844856,
+            "AP50_pp": 0.2540637138210067,
+            "AP75_pp": -0.18763522291549428
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold04/evaluation/states"
+      },
+      "fold05": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 86,
+          "val_AP50": 0.78017
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "8440efb1bd64c41aa0d9489fe896ede30a48a49e7bec3eb6d36ef00f2d0e54c8"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.5040158416507843,
+            "AP50": 0.7587506059685045,
+            "AP75": 0.5948688954300446
+          },
+          "uniform": {
+            "mAP50_95": 0.5041640770099113,
+            "AP50": 0.7584999978750645,
+            "AP75": 0.5949424451919655
+          },
+          "zero": {
+            "mAP50_95": 0.507349750226752,
+            "AP50": 0.7591950231672943,
+            "AP75": 0.5955577334722361
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": -0.014823535912700248,
+            "AP50_pp": 0.0250608093440019,
+            "AP75_pp": -0.007354976192086582
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": -0.33339085759677145,
+            "AP50_pp": -0.04444171987897372,
+            "AP75_pp": -0.0688838042191442
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold05/evaluation/states"
+      },
+      "fold06": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 43,
+          "val_AP50": 0.84739
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "24c15bbe7623bf8b99552520d026ad06c01816ce9de75c2d2e744fdb6cd7f507"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.47182220358270677,
+            "AP50": 0.7945200632398988,
+            "AP75": 0.4871701081370852
+          },
+          "uniform": {
+            "mAP50_95": 0.47170963055910314,
+            "AP50": 0.7944852052934839,
+            "AP75": 0.4871431678605382
+          },
+          "zero": {
+            "mAP50_95": 0.47145208903138347,
+            "AP50": 0.7957256421887088,
+            "AP75": 0.49036320158116997
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": 0.011257302360362376,
+            "AP50_pp": 0.003485794641489015,
+            "AP75_pp": 0.0026940276547038344
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": 0.03701145513232973,
+            "AP50_pp": -0.12055789488100155,
+            "AP75_pp": -0.3193093444084749
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold06/evaluation/states"
+      },
+      "fold07": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 31,
+          "val_AP50": 0.80421
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "845681e97f5d200bdbafb3edd6779220a09d0c0e87330dad8559f0bef66de131"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.4253120103453991,
+            "AP50": 0.6580141032035796,
+            "AP75": 0.526097855793554
+          },
+          "uniform": {
+            "mAP50_95": 0.42551562792045716,
+            "AP50": 0.6580507888466542,
+            "AP75": 0.5259907726762065
+          },
+          "zero": {
+            "mAP50_95": 0.42633110898152865,
+            "AP50": 0.6600887599367866,
+            "AP75": 0.5203757348240223
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": -0.0203617575058046,
+            "AP50_pp": -0.003668564307468536,
+            "AP75_pp": 0.010708311734741738
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": -0.1019098636129534,
+            "AP50_pp": -0.20746567332070587,
+            "AP75_pp": 0.5722120969531619
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold07/evaluation/states"
+      },
+      "fold08": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 88,
+          "val_AP50": 0.79667
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "0d76b58737ce4de07edb80fd20b99f74e1cfa8e7a67594089cf5df8443693c66"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.5288453730705671,
+            "AP50": 0.8391398904305903,
+            "AP75": 0.5442510987286221
+          },
+          "uniform": {
+            "mAP50_95": 0.5287980575388641,
+            "AP50": 0.8390148904305903,
+            "AP75": 0.5440780218055452
+          },
+          "zero": {
+            "mAP50_95": 0.5291964660662961,
+            "AP50": 0.8398985463382853,
+            "AP75": 0.5401339531046891
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": 0.004731553170300717,
+            "AP50_pp": 0.012500000000004174,
+            "AP75_pp": 0.017307692307688693
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": -0.035109299572899655,
+            "AP50_pp": -0.07586559076949717,
+            "AP75_pp": 0.41171456239329496
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold08/evaluation/states"
+      },
+      "fold09": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 36,
+          "val_AP50": 0.8231
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "e80322a1a0de49aa282697e4563923e247baa1d2d6dc8d951a2036db96e6fd40"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.4625828599374768,
+            "AP50": 0.7336906663976501,
+            "AP75": 0.5376551684496134
+          },
+          "uniform": {
+            "mAP50_95": 0.4626572735062422,
+            "AP50": 0.7337489530836392,
+            "AP75": 0.5374988753856267
+          },
+          "zero": {
+            "mAP50_95": 0.4622560517491697,
+            "AP50": 0.7332446797770622,
+            "AP75": 0.5340506902187828
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": -0.007441356876541905,
+            "AP50_pp": -0.005828668598906184,
+            "AP75_pp": 0.015629306398667886
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": 0.03268081883070484,
+            "AP50_pp": 0.04459866205879237,
+            "AP75_pp": 0.36044782308305434
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold09/evaluation/states"
+      },
+      "fold10": {
+        "selection": {
+          "criterion": "val AP50",
+          "epoch": 85,
+          "val_AP50": 0.78131
+        },
+        "training": {
+          "completed_epochs": 100,
+          "last_epoch": 100,
+          "csv_epochs": 100,
+          "raw_callback_count": 101,
+          "csv_complete": true,
+          "best_sha256": "a210de4b508d205110a522daaec0478fa40a5fc2f18d015dd3892f5efbc75ad2"
+        },
+        "states": {
+          "native": {
+            "mAP50_95": 0.5221450409031819,
+            "AP50": 0.7725256808772216,
+            "AP75": 0.6287898381024215
+          },
+          "uniform": {
+            "mAP50_95": 0.5221238404851,
+            "AP50": 0.7724853582965764,
+            "AP75": 0.6287433497080854
+          },
+          "zero": {
+            "mAP50_95": 0.5212145503969141,
+            "AP50": 0.7739645249422622,
+            "AP75": 0.6308961882991062
+          }
+        },
+        "deltas_pp": {
+          "native_minus_uniform": {
+            "mAP50_95_pp": 0.002120041808195694,
+            "AP50_pp": 0.004032258064523564,
+            "AP75_pp": 0.004648839433607499
+          },
+          "native_minus_zero": {
+            "mAP50_95_pp": 0.09304905062678115,
+            "AP50_pp": -0.14388440650405787,
+            "AP75_pp": -0.2106350196684703
+          }
+        },
+        "source_pointer": "/new_computation/folds/fold10/evaluation/states"
+      }
+    },
+    "means_fraction": {
+      "native": {
+        "mAP50_95": 0.48198263598601654,
+        "AP50": 0.7620554894208453,
+        "AP75": 0.5424094725742518
+      },
+      "uniform": {
+        "mAP50_95": 0.48194487267367103,
+        "AP50": 0.761837571694074,
+        "AP75": 0.5421985674701413
+      },
+      "zero": {
+        "mAP50_95": 0.48209274268794083,
+        "AP50": 0.7621621554382565,
+        "AP75": 0.5435278428049224
+      }
+    },
+    "mean_deltas_pp": {
+      "native_minus_uniform": {
+        "mAP50_95_pp": 0.0037763312345506783,
+        "AP50_pp": 0.021791772677137722,
+        "AP75_pp": 0.021090510411048147
+      },
+      "native_minus_zero": {
+        "mAP50_95_pp": -0.011010670192429517,
+        "AP50_pp": -0.01066660174111611,
+        "AP75_pp": -0.11183702306706289
+      }
+    },
+    "primary_delta_distributions": {
+      "native_minus_uniform": {
+        "metric": "mAP50-95",
+        "per_fold_pp": {
+          "fold01": 0.008875657454071595,
+          "fold02": -0.088311314981937,
+          "fold03": 0.0007439778422102528,
+          "fold04": 0.14097274498728884,
+          "fold05": -0.014823535912700248,
+          "fold06": 0.011257302360362376,
+          "fold07": -0.0203617575058046,
+          "fold08": 0.004731553170300717,
+          "fold09": -0.007441356876541905,
+          "fold10": 0.002120041808195694
+        },
+        "min_pp": -0.088311314981937,
+        "max_pp": 0.14097274498728884,
+        "mean_abs_pp": 0.029963924289941324,
+        "positive_folds": 6,
+        "negative_folds": 4
+      },
+      "native_minus_zero": {
+        "metric": "mAP50-95",
+        "per_fold_pp": {
+          "fold01": 0.2240940818484194,
+          "fold02": -0.26840030553036964,
+          "fold03": 0.08115770173201531,
+          "fold04": 0.16071051621844856,
+          "fold05": -0.33339085759677145,
+          "fold06": 0.03701145513232973,
+          "fold07": -0.1019098636129534,
+          "fold08": -0.035109299572899655,
+          "fold09": 0.03268081883070484,
+          "fold10": 0.09304905062678115
+        },
+        "min_pp": -0.33339085759677145,
+        "max_pp": 0.2240940818484194,
+        "mean_abs_pp": 0.1367513950701693,
+        "positive_folds": 6,
+        "negative_folds": 4
+      }
+    },
+    "source": {
+      "summary_sha256": "362d8e4d50f01a18e46fd1e101236afb8287da8d09121f9c17d6eefded4076b4",
+      "pointer": "/new_computation/folds",
+      "record_id": "cross-dataset-evaluation-summary"
+    }
+  },
+  "evaluation_hbb": {
+    "validator": "sadcf_ica.engine.validator.DualDetectionValidator",
+    "split": "test",
+    "batch": 8,
+    "rect_actual": true,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "half": false,
+    "augment": false,
+    "metrics": {
+      "primary": "mAP50-95",
+      "secondary": [
+        "AP50",
+        "AP75"
+      ]
+    },
+    "empty_predictions": "retained in seen"
+  },
+  "state_definitions": {
+    "uniform": "after softmax and before the original attention dropout, every head's probability weights are replaced by 1/nk for the actual key length; Q/K still run; current V, out_proj, residual dropout, token residual, LN2/MLP, U, R and downstream are retained",
+    "zero": "the two tensors returned by CrossAttention are replaced by zeros after the call and before coefficient2/coefficient4 consume them; attention still runs; token residual, LN2/MLP, coefficients and downstream remain"
+  },
+  "dv_reference": {
+    "file": "dv_results.json",
+    "sha256": "366d18692d3c0bd02b0c4e3fc655872345f4535cd2de0d2d98157fe82f76af88",
+    "source_snapshot_sha256": "47a435672993e0300d3bd40fcd28d1b8305ddb80a96ea5aa79d3806c0bda7ad4",
+    "note": "DroneVehicle values use the common-M measurements in the included file."
+  },
+  "notes": [
+    "Each dataset retains its recorded evaluation protocol.",
+    "All three states share the selected checkpoint within a dataset or VEDAI fold.",
+    "VEDAI uses one training seed per fold. Means are arithmetic means of per-fold AP values.",
+    "Native tensor diagnostics are from DroneVehicle; the cross-dataset observations are intervention results.",
+    "ZERO zeroes the projected returned cross-attention outputs while retaining the surrounding pathways.",
+    "Deltas are calculated from full-precision fractions before display rounding; percentages are fractions times 100 and differences are percentage points."
+  ],
+  "provenance": {
+    "record_id": "cross-dataset-results",
+    "source_snapshot_sha256": "f9befbc5a720103893588b8c3d02ee25354da18464ae6ec008ffeb9c26033fdc"
+  },
+  "cross_dataset_table": {
+    "caption_note": "DroneVehicle rows are OBB common-M mAP50-95; FLIR3c and VEDAI rows are native HBB mAP50-95. VEDAI is a ten-fold arithmetic mean, not a pooled score or ten seeds. No cross-dataset ranking.",
+    "rows": [
+      {
+        "label": "DroneVehicle, ICAFusion seed 2 (OBB, one checkpoint)",
+        "seed": 2,
+        "protocol": "common M mAP50-95",
+        "native_percent": 56.91815539365468,
+        "uniform_percent": 56.91978502830155,
+        "zero_percent": 56.493884986772414,
+        "native_minus_uniform_pp": -0.001629634646867828,
+        "native_minus_zero_pp": 0.4242704068822647,
+        "source": {
+          "sha256": "366d18692d3c0bd02b0c4e3fc655872345f4535cd2de0d2d98157fe82f76af88",
+          "pointers": [
+            "/levels/ica_s2_native/M/mAP50_95_percent",
+            "/levels/ica_s2_uniform/M/mAP50_95_percent",
+            "/levels/ica_s2_zero/M/mAP50_95_percent"
+          ],
+          "file": "dv_results.json",
+          "source_snapshot_sha256": "47a435672993e0300d3bd40fcd28d1b8305ddb80a96ea5aa79d3806c0bda7ad4"
+        }
+      },
+      {
+        "label": "DroneVehicle, ICAFusion seed 3 (OBB, one checkpoint)",
+        "seed": 3,
+        "protocol": "common M mAP50-95",
+        "native_percent": 56.83329408933415,
+        "uniform_percent": 56.834308544781656,
+        "zero_percent": 56.57584408110661,
+        "native_minus_uniform_pp": -0.0010144554475033374,
+        "native_minus_zero_pp": 0.2574500082275435,
+        "source": {
+          "sha256": "366d18692d3c0bd02b0c4e3fc655872345f4535cd2de0d2d98157fe82f76af88",
+          "pointers": [
+            "/levels/ica_s3_native/M/mAP50_95_percent",
+            "/levels/ica_s3_uniform/M/mAP50_95_percent",
+            "/levels/ica_s3_zero/M/mAP50_95_percent"
+          ],
+          "file": "dv_results.json",
+          "source_snapshot_sha256": "47a435672993e0300d3bd40fcd28d1b8305ddb80a96ea5aa79d3806c0bda7ad4"
+        }
+      },
+      {
+        "label": "FLIR3c, ICAFusion seed 1 (HBB, one checkpoint)",
+        "seed": 1,
+        "protocol": "native HBB mAP50-95",
+        "native_percent": 42.398767354332584,
+        "uniform_percent": 42.39726489142542,
+        "zero_percent": 42.343897719323905,
+        "native_minus_uniform_pp": 0.0015024629071602735,
+        "native_minus_zero_pp": 0.054869635008675255,
+        "source": {
+          "sha256": "362d8e4d50f01a18e46fd1e101236afb8287da8d09121f9c17d6eefded4076b4",
+          "pointers": [
+            "/reused_flir/evaluation/states/native",
+            "/reused_flir/evaluation/states/uniform",
+            "/reused_flir/evaluation/states/zero"
+          ],
+          "record_id": "cross-dataset-evaluation-summary"
+        }
+      },
+      {
+        "label": "VEDAI, ICAFusion ten-fold mean (HBB, ten checkpoints)",
+        "seed": "1 per fold",
+        "protocol": "native HBB mAP50-95",
+        "native_percent": 48.198263598601656,
+        "uniform_percent": 48.1944872673671,
+        "zero_percent": 48.20927426879408,
+        "native_minus_uniform_pp": 0.0037763312345506783,
+        "native_minus_zero_pp": -0.011010670192429517,
+        "source": {
+          "sha256": "362d8e4d50f01a18e46fd1e101236afb8287da8d09121f9c17d6eefded4076b4",
+          "pointers": [
+            "/new_computation/folds/*/evaluation/states"
+          ],
+          "note": "arithmetic mean of ten per-fold AP fractions, computed in this file",
+          "record_id": "cross-dataset-evaluation-summary"
+        }
+      }
+    ]
+  }
+}
